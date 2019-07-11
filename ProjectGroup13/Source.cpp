@@ -2,8 +2,8 @@
 int main() {
 	ifstream fin;
 	bool mark[100];
-	Node *tree = base();
-	Node *tree1 = base();
+	Node *tree = baseNode();
+	treearr treeafter1;
 	char keyword[75];
 	cout << "Enter key words: " << endl;
 	cin.getline(keyword, 75);
@@ -11,8 +11,8 @@ int main() {
 	{
 		keyword[i] = towlower(keyword[i]);
 	}
-	search_filemark(tree, tree1, keyword, mark);
-	outputfile(mark);
+	inputfile(tree, treeafter1);
+	outputfile(tree,treeafter1,keyword);
 	system("pause");
 	return 0;
 }

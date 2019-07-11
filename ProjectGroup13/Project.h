@@ -1,30 +1,28 @@
 #pragma once
 #include <iostream>
-#include<vector>
 #include <fstream>
 #include<string>
 #include<sstream>
 #include<string.h>
 #include<stdio.h>
 #include<conio.h>
+#include <unordered_map> 
 const int Size = 28;
 using namespace std;
 #define Project_h_
 #ifdef Project_h_
-class Node {
-public:
-	Node *child[Size];
-	bool isword;
-
+using namespace std;
+struct Node {
+	bool endword;
+	unordered_map<char, Node*> map;
 };
-Node *base();
-Node *createNode(char key[75]);
-	
-void insert(Node *&tree, char key[75]);
-void input(Node *&tree, Node *& treenext);
-void resettree(Node *tree);
-bool search(Node *tree, char key[75]);
-void search_filemark(Node *&tree, Node *&treenext, char key[75], bool mark[]);
-void outputfile(bool mark[]);
+struct treearr {
+	vector<Node*> arraytree;
+};
+Node *baseNode();
+void insert(Node*& tree, char key[75]);
+bool search(Node* tree, char key[75]);
+void inputfile(Node *&tree,treearr &treenext);
+void outputfile(Node *tree, treearr &treenext, char key[75]);
 #endif // !	Project_h_
 
