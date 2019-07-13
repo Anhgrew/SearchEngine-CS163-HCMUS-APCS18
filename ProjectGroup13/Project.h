@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include<string>
 #include<sstream>
-#include<string.h>
+#include<string>
 #include<stdio.h>
 #include<conio.h>
 #include <unordered_map> 
@@ -18,9 +19,9 @@ struct Node {
 };
 
 Node *baseNode();
-void insert(Node*& tree, char key[75]);
-bool search(Node* tree, char key[75]);
-void inputfile(Node *&tree,vector<Node *> &treenext);
-void outputfile(Node *tree,vector<Node *> &treenext, char key[75]);
+void insert(Node*& tree,const string& key);
+bool search(Node* tree,const string& key);
+void inputfile(vector<Node *> &tree);
+void outputfile(vector<Node *> &tree,const string& key);
 #endif // !	Project_h_
 

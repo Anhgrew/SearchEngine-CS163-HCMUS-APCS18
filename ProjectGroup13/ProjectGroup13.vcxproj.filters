@@ -31,5 +31,27 @@
     <Text Include="Group13News01.txt" />
     <Text Include="Group13News02.txt" />
     <Text Include="Group13News03.txt" />
+    <Text Include="Group13News04.txt" />
+    <Text Include="Group13News05.txt" />
+    <Text Include="Group13News06.txt" />
+    <Text Include="Group13News07.txt" />
+    <Text Include="Group13News08.txt" />
+    <Text Include="Group13News09.txt" />
+    <Text Include="Group13News10.txt" />
+    <Text Include="Group13News11.txt" />
+    <Text Include="Group13News12.txt" />
+    <Text Include="Group13News13.txt" />
+    <Text Include="Group13News14.txt" />
+    <Text Include="Group13News15.txt" />
+    <Text Include="Group13News16.txt" />
+    <Text Include="Group13News17.txt" />
+    <Text Include="Group13News18.txt" />
+    <Text Include="Group13News19.txt" />
+    <Text Include="Group13News20.txt" />
+    <Text Include="Group13News21.txt" />
+    <Text Include="Group13News22.txt" />
+    <Text Include="Group13News23.txt" />
+    <Text Include="Group13News24.txt" />
+    <Text Include="Group13News25.txt" />
   </ItemGroup>
 </Project>
