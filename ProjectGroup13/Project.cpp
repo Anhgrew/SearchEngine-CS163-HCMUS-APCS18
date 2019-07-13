@@ -73,7 +73,7 @@ bool search(Node *tree, char key[75])
 		}
 		return temp->endword;
 }
-void inputfile(Node *& tree, treearr & treenext)
+void inputfile(Node *& tree,vector<Node *>& treenext)
 {
 	ifstream fin;
 	ostringstream convert;
@@ -87,10 +87,12 @@ void inputfile(Node *& tree, treearr & treenext)
 		insert(tree, word);
 	}
 	fin.close();
-
-	Node *treeafter_1 = baseNode();	// van de cay moi duoc tao.... dcm hay la tim cach doi ten de tao ra 
-	//100 cay khac nhau nhu kieu doi ten tap tin de nhap file vay, doc code di thang lol.
-	for (int i = 2; i < 12; i++) {
+	treenext.resize(4);
+	for (int i = 1; i < 4; i++)
+	{
+	treenext[i] = baseNode();
+	}
+	for (int i = 2; i < 4; i++) {
 		int k = i;
 		convert.str("");
 		convert << i;
@@ -100,9 +102,8 @@ void inputfile(Node *& tree, treearr & treenext)
 		while (!fin.eof())
 		{
 			fin.getline(word, 75, ' ');
-			insert(treeafter_1, word);
+			insert(treenext[i], word);
 		}
-		treenext.arraytree.push_back(treeafter_1); // them cay vao mang cay nhung cay cu hinh nhu chua duoc xoa nen no luu vo cay cu roi them vao chuoi cay 2 cay lam 1->search sai.
 	if (k < 10) {						  
 			path = "Group13News0";
 		}
@@ -112,7 +113,7 @@ void inputfile(Node *& tree, treearr & treenext)
 		fin.close();  
 	}
 }				
-void outputfile(Node *tree, treearr &treenext,char key[75])
+void outputfile(Node *tree, vector<Node *> &treenext,char key[75])
 {
 	int count = 1;
 	string path = "Group13News0";
@@ -125,7 +126,7 @@ void outputfile(Node *tree, treearr &treenext,char key[75])
 	}
 	for (int i = 2; i < 4; i++) {
 		int k = i;
-		if (search(treenext.arraytree.at(i),key)==true && count <= 4) {
+		if (search(treenext[i],key)==true && count <= 4) {
 			cout << path << i << ".txt" << endl << endl;
 			count++;
 		}

@@ -16,13 +16,11 @@ struct Node {
 	bool endword;
 	unordered_map<char, Node*> map;
 };
-struct treearr {
-	vector<Node*> arraytree;
-};
+
 Node *baseNode();
 void insert(Node*& tree, char key[75]);
 bool search(Node* tree, char key[75]);
-void inputfile(Node *&tree,treearr &treenext);
-void outputfile(Node *tree, treearr &treenext, char key[75]);
+void inputfile(Node *&tree,vector<Node *> &treenext);
+void outputfile(Node *tree,vector<Node *> &treenext, char key[75]);
 #endif // !	Project_h_
 
