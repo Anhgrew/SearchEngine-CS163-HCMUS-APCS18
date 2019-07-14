@@ -94,18 +94,16 @@ void inputfile(vector<Node *>& tree)
 		path.append(".txt");
 		fin.open(path, ios::in);
 		char c;
-		string wq = "'";
 		while (fin.get(c))
 		{
 			c = tolower(c);
-			if ((c >= '0' &&c <= '9') || (c >= 'a'&&c <= 'z')) {
+			if (isalnum(static_cast<unsigned char>(c))) {
 				word += c;
 			}
-			if (c == ' ' || c == wq[0]||c=='\n' || c==EOF) {
-				//cout << word << endl;	buon thi bo ra coi chay chu choi....  van ko doc dk chu dau va cuoi.
+			if (!isalnum(static_cast<unsigned char>(c))) {
 				insert(tree[i], word);
 				word = "";
-			}	
+			}
 		}
 		fin.close();
 		if (k < 10) {
@@ -116,15 +114,24 @@ void inputfile(vector<Node *>& tree)
 		}
 	}
 }
-void outputfile(vector<Node *> &tree, const string& key)
+void outputfile(vector<Node *> &tree, string key[1000],int p)
 {
+	bool final = false;
 	int count = 1;
 	string path = "Group13News0";
-	cout << "The key words was found in file: " << endl;
+	cout << "THE KEYWORDS WAS FOUND IN FILES: " << endl;
+	bool mark[100];
 	for (int i = 1; i < 26; i++) {
 		int k = i;
-		if (search(tree[i], key) == true && count <= 5) {
-			cout << path << i << ".txt" << endl << endl;
+		mark[i] = true;
+		for (int j = 0; j < p; j++)
+		{
+			if (search(tree[i], key[j]) == false) {
+				mark[i] = false;
+			}
+		}
+		if (mark[i] == true && search(tree[i], key[p]) == true &&count<=5) {
+			cout << path << k << endl << endl;
 			count++;
 		}
 		if (k < 10) {
@@ -133,6 +140,16 @@ void outputfile(vector<Node *> &tree, const string& key)
 		else {
 			path = "Group13News";
 		}
+	}
+	for (int i = 0; i < 26; i++)
+	{
+		if (mark[i]==true)
+		{
+			final = true;
+		}
+	}
+	if (final == false) {
+		cout << "NOT FOUND THIS KEYWORD...:( " << endl;
 	}
 }
 

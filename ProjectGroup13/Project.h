@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <cstdlib>
 #include <fstream>
 #include <algorithm>
 #include<string>
@@ -17,11 +18,10 @@ struct Node {
 	bool endword;
 	unordered_map<char, Node*> map;
 };
-
 Node *baseNode();
 void insert(Node*& tree,const string& key);
 bool search(Node* tree,const string& key);
 void inputfile(vector<Node *> &tree);
-void outputfile(vector<Node *> &tree,const string& key);
+void outputfile(vector<Node *> &tree,string key[1000],int p);
 #endif // !	Project_h_
 
