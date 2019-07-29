@@ -7,9 +7,9 @@
 #include<ctime>
 using namespace std;
 struct Node {
-	Node* children[42];//0-9:number,10-35:words,36:maybe :,37:.(for so thap phan), 38:$, 39:%, 40:#, 41:-
+	Node* children[42];
 	bool isLeaf, isTitle;
-	vector<int> order;//place it appears
+	vector<int> order;
 	string name_file;
 };
 struct Store {
@@ -30,6 +30,20 @@ public:
 	bool isNumber(char key);
 	bool isWord(char key);
 	void DeleteTries(Node* & root);
+	void InputListFile(vector<Node*>&root);
+	void InputFile(Node*& root, ifstream& file);
+	void InsertStopword(Node*& root);
+	void InputSen(Node*& root, string sen, int& start, bool title);
+	bool searchRoot(Node* root, string query, Node* stopword, vector<int>& pos, int& score);
+	void Init(vector<Node*>&root, Node* &stopword);
+	bool isstopword(Node *& root, string &stopword);
+	void removing_stopword(string &key, Node *& stopword);
+	bool checkOperator(string query);
+	string SenFilter(string sen);
+	void OutputResult(string filename, vector<int> pos);
 };
+void loading(int x, int y);
+void VeKhungCH(int x, int y, int width, int height, bool draw);
+void resizeConsole(int width, int height);
 
 
