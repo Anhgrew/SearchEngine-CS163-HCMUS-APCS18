@@ -29,6 +29,7 @@
 //--------------------------------------------------------
 
 #include <windows.h>
+
 //--------------------------------------------------------
 
 int inputKey();
@@ -36,6 +37,7 @@ int inputKey();
 //-------------------------Screen-------------------------
 void clrscr();
 
+//screen: goto [x,y]
 void gotoXY(int column, int line);
 
 //screen: get [x]
@@ -47,5 +49,10 @@ int whereY();
 void TextColor(int color);
 //end----------------------Screen----------------------end
 
+void resizeConsole(int width, int height);
+
+void VeKhungCH(int x, int y, int width, int height, bool draw);
+
+void loading(int x, int y);
 
 #endif
