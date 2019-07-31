@@ -1,17 +1,29 @@
+<<<<<<< HEAD
 ﻿#include "Project.h"
 #include "Console.h"
 //return the new Node
 //ASCII, 0:48, 9:57, a:97, z:122, A:65, Z:90
 Node* Engine::getNode() {//Nam
+=======
+#include "Project.h"
+#include "Console.h"
+
+//return the new Node
+//ASCII, 0:48, 9:57, A:65, Z:90, a:97, z:122
+
+Node* Engine::getNode() {  // Creat Node. Use for all situation. Kiem tra neu node la leaf or title
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	Node* pNode = NULL;
 	pNode = new Node;
 	if (pNode) {
 		pNode->isLeaf = false;
 		pNode->isTitle = false;
-		for (int i = 0; i < 42; ++i) pNode->children[i] = NULL;
+		for (int i = 0; i < 42; ++i) 
+			pNode->children[i] = NULL;
 	}
 	return pNode;
 }
+<<<<<<< HEAD
 string Engine::NumberToString(int num) {//Viet
 	stringstream ss;
 	ss << num;
@@ -35,6 +47,9 @@ void Engine::insertWord(Node* &root, string key, int place, bool title) {//Nam
 	p->order.push_back(place);
 	if (title) p->isTitle = true;
 }
+=======
+
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 void Engine::addfile(vector<Node*>& root, string namefile, Node*& p)
 {
 	bool check = true;
@@ -98,19 +113,85 @@ void Engine::addfile(vector<Node*>& root, string namefile, Node*& p)
 		fin.close();
 	}
 }
+<<<<<<< HEAD
 void Engine::insertStopword(Node* &root, string key) {//Nam
+=======
+
+void Engine::insertWord(Node* &root, string key, int place, bool title) {
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	Node* p = root;
 	int index, length = key.length();													  
 	for (int i = 0; i < length; ++i) {
 		index = convert(key[i]);
 		if (index == -1) continue;
+		if (!p->children[index]) 
+			p->children[index] = getNode();
+		p = p->children[index];
+	}
+	p->isLeaf = true;
+	p->order.push_back(place);
+	if (title) 
+		p->isTitle = true;
+}
+
+//Insert triE of stop-word
+void Engine::InsertStopword(Node*& root) {
+	ifstream file;
+	string get;
+	file.open("StopWord.txt");
+	if (!file.is_open()) return;
+	while (!file.eof()) {
+		getline(file, get);
+		insertStopword(root, get);
+	}
+	file.close();
+}
+
+void Engine::insertStopword(Node* &stopWord, string key) {
+	Node* p = stopWord;
+	int index, length = key.length();
+	for (int i = 0; i < length; ++i) {
+		index = convert(key[i]);
+		if (index == -1) 
+			continue;
 		if (!p->children[index]) p->children[index] = getNode();
 		p = p->children[index];
 	}
 	p->isLeaf = true;
 }
+<<<<<<< HEAD
 //return true if key presents in trie, else false
 Node* Engine::searchWord(Node* root, string key, bool title) {//Khanh
+=======
+
+void Engine::removing_stopword(string& key, Node*& stopword)
+{
+	string tmp = " ";
+	string result = "";
+	stringstream newkey(key);
+	string word;
+	while (newkey >> word)
+	{
+
+		if ((!isstopword(stopword, word)) || (word == "AND" || word == "OR" || word == "intitle:" || word == "+and" || word == "filetype:txt" || word == "~" || word == "*"))
+		{
+			result += word;
+			result += tmp;
+		}
+	}
+	key = result;
+}
+
+bool Engine::isstopword(Node*& root, string& stopword)
+{
+	if (searchWord(root, stopword, false) != NULL) 
+	return true;
+	else return false;
+}
+
+//return true if key presents in trie, else false
+Node* Engine::searchWord(Node* root, string key, bool title) {
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	Node* p = root;
 	int index, length = key.length();
 	for (int i = 0; i < length; ++i) {
@@ -125,13 +206,26 @@ Node* Engine::searchWord(Node* root, string key, bool title) {//Khanh
 	}
 	return NULL;
 }
+<<<<<<< HEAD
 string Engine::SenFilter(string sen) {//Khanh
+=======
+
+// Loc dau ', neu la dau ' thi khong luu vao mang
+string Engine::SenFilter(string sen) { 
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	string res;
 	int length = sen.length();
 	for (int i = 0; i < length; ++i) {
 		if (!accept(sen[i])) {
+<<<<<<< HEAD
 			if (sen[i] == 39 && sen[i + 1] == 's'&&sen[i + 2] == ' ') ++i;
 			else if (i + 1 != length && sen[i] == '.'&&isNumber(sen[i - 1]) && isNumber(sen[i + 1]))//so thap phan
+=======
+		//	if (sen[i] == 39 && sen[i + 1] == 's' && sen[i + 2] == ' ') ++i;
+			if (sen[i] == 39) // la dau '
+				++i;
+			else if (i + 1 != length && sen[i] == '.' && isNumber(sen[i - 1]) && isNumber(sen[i + 1]))//so thap phan
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 				res.append(sen, i, 1);
 		}
 		else res.append(sen, i, 1);//get 1 
@@ -139,6 +233,7 @@ string Engine::SenFilter(string sen) {//Khanh
 	return res;
 }
 
+<<<<<<< HEAD
 void Engine::InsertStopword(Node*& root) {//trie of stopword, Nam
 	ifstream file;
 	string get;
@@ -151,27 +246,42 @@ void Engine::InsertStopword(Node*& root) {//trie of stopword, Nam
 	file.close();
 }
 void Engine::InputListFile(vector<Node*>& root) {//Khanh
+=======
+void Engine::InputListFile(vector<Node*>& root) {   //Load
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	ifstream fin;
 	int k = 0;
 	vector <string> namefileinput;
 	fin.open("___index.txt", ios::in);
 	int i = 0;
 	string name_offile;
+<<<<<<< HEAD
 	root.resize(100);	 
 	while (getline(fin, name_offile))
+=======
+	root.resize(50);
+	while (!fin.eof())
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	{
+		getline(fin, name_offile);
 		namefileinput.push_back(name_offile);
 		k++;
 	}
 	fin.close();
+<<<<<<< HEAD
 	
 	for (int i = 0; i < 100; i++)
+=======
+
+	for (int i = 0; i < 50; i++)
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	{
 		system("cls");
 		root[i] = getNode();
 		root[i]->name_file = namefileinput[i];
 		fin.open(root[i]->name_file, ios::in);
 		InputFile(root[i], fin);
+<<<<<<< HEAD
 		cout << "________________________________________________________LOADING______________________________________________________" << endl;
 		fin.close();
 	}
@@ -187,6 +297,36 @@ void Engine::InputFile(Node*& root, ifstream& file) {//open each file,Khanh
 		if (sen.length() && isNumber(sen.back())) {
 			string next;
 			getline(file, next, '.');									 
+=======
+		
+		cout << "|________________________________________________________LOADDING______________________________________________________|                       " << endl;
+		fin.close();
+	}
+}
+
+//Check if file have the Enter or not. Have the Enter: True and Haven't: False
+/*bool checkDocEnter(ifstream& file)
+{
+	string sen;
+	getline(file, sen, '\n');
+	if (sen.length() > 30)
+		return false;
+	return true;
+}*/
+
+void Engine::InputFile(Node*& root, ifstream& file) {//open each file
+	int start = 0;
+	string sen;
+	getline(file, sen, '.');
+	//get the title
+	InputSen(root, sen, start, true);     //a trie for the intitle:
+	while (!file.eof()) {
+		getline(file, sen, '.');//get a sentence
+
+		if (sen.length() && isNumber(sen.back())) {		//Kiem tra
+			string next;								// Neu day 
+			getline(file, next, '.');					// So thap phan				 
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 			if (next.length() && isNumber(next[0])) {
 				sen = sen + '.' + next;
 				InputSen(root, sen, start, false);
@@ -201,18 +341,34 @@ void Engine::InputFile(Node*& root, ifstream& file) {//open each file,Khanh
 		InputSen(root, sen, start, false);
 	}
 }
+<<<<<<< HEAD
 void Engine::InputSen(Node*& root, string sen, int& start, bool title) {//sen has been filted, start:place to start sentence
 	sen = SenFilter(sen);//Nam
 	if (!root) return;
+=======
+
+void Engine::InputSen(Node*& root, string sen, int& start, bool title) {//sen has been filted, start:place to start sentence
+	sen = SenFilter(sen);
+	if (!root) 
+		return;
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	stringstream ss(sen);
-	while (ss >> sen) {
-		if (title) insertWord(root, sen, start, true);
+	while (ss >> sen) 
+	{
+		if (title) 
+			insertWord(root, sen, start, true);
 		else insertWord(root, sen, start, false);
 		++start;
 	}
 }
+<<<<<<< HEAD
 bool Engine::searchRoot(Node* root, string query, Node* stopword, vector<int>& pos, int& score) {//search a file, score=0 initially
 	stringstream ss(query);//Khanh
+=======
+
+bool Engine::searchRoot(Node* root, string query, Node* stopword, vector<int>& pos, int& score) {//search a file, score=0 initially
+	stringstream ss(query);
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	string tmp, get;
 	while (ss >> tmp) {
 		if (tmp[0] == '"') {//exact match and wildcard
@@ -334,12 +490,24 @@ bool Engine::searchRoot(Node* root, string query, Node* stopword, vector<int>& p
 	}
 	return true;
 }
+<<<<<<< HEAD
 void Engine::OutputResult(string filename, vector<int> pos) {//Khanh
 	if (!pos.size()) return;
 	ifstream file; file.open(filename);
 	if (!file.is_open()) { 
 	cout << "Error" << endl; return; }
 	string title;
+=======
+
+void Engine::OutputResult(string filename, vector<int> pos) {
+	if (!pos.size()) return;
+	ifstream file; file.open(filename);
+	if (!file.is_open()) { 
+		cout << "Error" << endl; 
+		return; 
+	}
+	string title; 
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	getline(file, title);
 	cout << title << endl;
 	file.clear();
@@ -348,7 +516,11 @@ void Engine::OutputResult(string filename, vector<int> pos) {//Khanh
 	while (!file.eof()) {
 		string tmp, res;
 		getline(file, tmp, '.');
+<<<<<<< HEAD
 		if (tmp.length() && isNumber(tmp.back())) {//decimal number case
+=======
+		if (tmp.length() && isNumber(tmp.back())) {	//decimal number case
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 			string next; getline(file, next, '.');
 			if (next.length() && isNumber(next[0])) {
 				tmp = tmp + '.' + next;
@@ -368,9 +540,15 @@ void Engine::OutputResult(string filename, vector<int> pos) {//Khanh
 			if (cur < pos.size() && pos[cur] == cnt) {
 				++cur;
 				for (int i = 0; i < tmp.length(); ++i) if (isWord(tmp[i])) tmp[i] -= 32;
+<<<<<<< HEAD
 				TextColor(78);
 				cout << tmp << " ";
 				TextColor(15);
+=======
+				TextColor(19);
+				cout << tmp << " ";
+				TextColor(7);
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 			}
 			else cout << tmp << " ";
 			++cnt;
@@ -379,31 +557,116 @@ void Engine::OutputResult(string filename, vector<int> pos) {//Khanh
 		if (cur >= pos.size()) {
 			file.close();
 			return;
+<<<<<<< HEAD
+=======
 		}
 	}
 	file.close();
 }
-int Engine::convert(char key) {
-	if (key >= 48 && key <= 57) return (key - '0');
-	if (key >= 97 && key <= 122) return (int(key) - 87);
-	if (key >= 65 && key <= 90) return (int(key) - 55);
-	if (key == ' ') return 36;
-	if (key == '.') return 37;
-	if (key == '$') return 38;
-	if (key == '%') return 39;
-	if (key == '#') return 40;
-	if (key == '-') return 41;
-	return -1;
-}
-bool Engine::accept(char& key) {//Viet
+
+bool Engine::accept(char& key) {
 	if (key >= 65 && key <= 90) {
 		key = int(key) + 32;
 		return true;
 	}
-	if ((key >= 48 && key <= 57) || (key >= 97 && key <= 122)) return true;
+	if ((48 <= key && key <= 57) || (97 <= key && key <= 122)) 
+		return true;
 	if (key == '\n') {
 		key = ' '; return true;
 	}
+	if (key == '—') {
+		key = '-'; return true;
+	}
+	if (key == ' ' || key == '$' || key == '%' || key == '#' || key == '-') return true;
+	return false;
+}
+
+
+void Engine::exact(vector<int>& res1, vector<int>& res2, int cnt, vector<int>& out1, vector<int>& out2) {
+	int i = 0, j = 0, size1 = res1.size(), size2 = res2.size();
+	while (i < size1&&j < size2) {
+		if (res1[i] + cnt < res2[j]) ++i;
+		else if (res2[j] < res1[i] + cnt) ++j;
+		else {
+			out1.push_back(res1[i++]);
+			out2.push_back(res2[j++]);
+		}
+	}
+}
+
+bool Engine::checkOperator(string query) {
+	stringstream ss(query);
+	string tmp;
+	while (ss >> tmp) {
+		string get; get = tmp.substr(0, 8);
+		if (get == "intitle:") return false;
+		if (tmp == "AND" || tmp == "OR" || tmp[0] == '-' || tmp == "*" || tmp == "filetype:txt" || tmp[0] == '"' || tmp.back() == '*') return false;
+		int length = tmp.length();
+		for (int i = 0; i <= length - 3; ++i) {
+			if (tmp[i] == '.' && tmp[i + 1] == '.') return false;
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
+		}
+	}
+	file.close();
+}
+
+vector<int> Engine::corporator(vector<int>& v1, vector<int>& v2) {
+	if (v1.empty()) return v2;
+	if (v2.empty()) return v1;
+	vector<int> res;
+	int i = 0, j = 0, size1 = v1.size(), size2 = v2.size();
+	while (i < size1&&j < size2) {
+		if (v1[i] < v2[j]) res.push_back(v1[i++]);
+		else if (v2[j] < v1[i]) res.push_back(v2[j++]);
+		else {
+			res.push_back(v2[j++]); ++i;
+		}
+	}
+	while (i < size1) res.push_back(v1[i++]);
+	while (j < size2) res.push_back(v2[j++]);
+	return res;
+}
+<<<<<<< HEAD
+bool Engine::accept(char& key) {//Viet
+	if (key >= 65 && key <= 90) {
+		key = int(key) + 32;
+		return true;
+=======
+void Engine::Init(vector<Node*>&root, Node* &stopword) {  //Input File into TriE and Stopword into Linkedlist
+	clock_t load = clock();
+	InputListFile(root);
+	InsertStopword(stopword);
+	clock_t het = clock();
+	cout << "Loading time: " << (float)(het - load) / CLOCKS_PER_SEC << "s" << endl;
+}
+
+void Engine::searchIncomplete(Node* root, string key, vector<int>& res) {
+	Node* p = root;
+	int index, length = key.length();
+	for (int i = 0; i < length; ++i) {
+		index = convert(key[i]);
+		if (index == -1) continue;//invalid
+		if (!p->children[index]) return;
+		p = p->children[index];
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
+	}
+	if (p) findIncomplete(p, res);
+}
+
+void Engine::findIncomplete(Node* root, vector<int>& res) {
+	if (root->isLeaf) res = corporator(res, root->order);
+	for (int i = 0; i <= 41; ++i)
+		if (root->children[i]) findIncomplete(root->children[i], res);
+}
+
+void Engine::findNumber(Node* root, string number, double lowbound, double upbound, vector<int>& pos) {
+	if (root->isLeaf) {
+		double num = atof(number.c_str());
+		if (num >= lowbound && num <= upbound) {
+			pos = corporator(pos, root->order);
+		}
+	}
+<<<<<<< HEAD
 	if (key == '—') {
 		key = '-'; return true;
 	}
@@ -638,29 +901,92 @@ void Engine::removing_stopword(string & key, Node *& stopword)
 		key = result;
 	}
 	cout << key;
-}
-void loading(int x, int y)
-{
-	TextColor(10);
-	VeKhungCH(x - 18, y - 1, 57, 2, true);
-	int i, c, d;
-	char a = 177, b = 219;
-	gotoXY(x + 8, y);
-	cout << "LOADING";
-	gotoXY(x + 1, y);
-	for (i = 0; i < 55; i++) {
-		c = rand() % 40;
-		Sleep(c);
-		cout << "\r\r";
-		cout << "\t\t\t\t";
+=======
+	for (int i = 0; i <= 37; ++i) {
+		if (i == 10) {
+			i += 26; continue;
+		}
+		if (root->children[i]) {
+			char append;
+			if (i != 37) append = i + '0';
+			else append = '.';
+			findNumber(root->children[i], number + append, lowbound, upbound, pos);
+		}
 	}
-	for (i = 0; i < 56; i++) {
-		cout << b;
-		d = rand() % 20;
-		Sleep(d);
-	}
-	system("cls");
 }
+
+bool Engine::getRange(string tmp, double& lowbound, double& upbound) {
+	string low, up;
+	int length = tmp.length();
+	bool check = false;
+	for (int i = 1; i <= length - 3; ++i) {
+		if (tmp[i] == '.'&&tmp[i + 1] == '.') { check = true; break; }
+	}
+	if (!check) return false;
+	int i;
+	for (i = 0; i < length; ++i) {
+		if (tmp[i] == '.'&&tmp[i + 1] == '.') break;
+		low += tmp[i];
+	}
+	i += 2;
+	for (i; i < length; ++i) {
+		up += tmp[i];
+	}
+	if (tmp[0] == '$') {
+		low = low.substr(1);
+		up = up.substr(1);
+	}
+	lowbound = atof(low.c_str());
+	upbound = atof(up.c_str());
+}
+
+bool CompareByScore(const Store&a, const Store&b) {
+	return a.score > b.score;
+}
+
+void Engine::destructor(vector<Node*>&root, Node* &stopword) {
+	root.clear();
+	DeleteTries(stopword);
+}
+
+void Engine::DeleteTries(Node* & root) {//destructor
+	if (!root) return;
+	for (int i = 0; i < 36; ++i) {
+		DeleteTries(root->children[i]);
+	}
+	delete root;
+	root = nullptr;
+}
+
+int WordinSen(string sen) {
+	stringstream ss(sen);
+	int cnt = 0;
+	string tmp;
+	while (ss >> tmp)
+		++cnt;
+	return cnt;
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
+}
+
+void History(vector<string>& res, string query) {
+	res.push_back(query);
+	cout << "Choose query:" << endl << "0. " << query << endl;
+	int i = 1;
+	ifstream input; input.open("history.txt");
+	string tmp;
+	while (!input.eof()) {
+		getline(input, tmp);
+		if (tmp == "" || query == tmp || tmp.find(query) == -1) continue;
+		cout << i << ". " << tmp << endl;
+		res.push_back(tmp);
+		++i;
+	}
+	input.close();
+	ofstream output; output.open("history.txt", ios::app);
+	output << query << endl;
+	output.close();
+}
+<<<<<<< HEAD
 void VeKhungCH(int x, int y, int width, int height, bool draw) {
 	//vẽ khung chữ nhật
 	if (draw) {
@@ -697,8 +1023,46 @@ void VeKhungCH(int x, int y, int width, int height, bool draw) {
 		for (int i = y + 1; i < (y + height); i++) {
 			gotoXY(x + width, i);
 			cout << char(179);
+=======
+
+vector<string> Engine::getSyno(string key) {
+	vector<string> res;
+	res.push_back(key);
+	if (key[0] >= 97 && key[0] <= 122) 
+		key[0] -= 32;
+	for (int i = 1; i < key.length(); ++i)
+		if (key[i] >= 65 && key[i] <= 90) 
+			key[i] += 32;
+	ifstream file; 
+	file.open("synonym.txt");
+	while (!file.eof()) {
+		string tmp;
+		getline(file, tmp);
+		stringstream ss(tmp);
+		ss >> tmp;
+		if (tmp != "KEY:") 
+			continue;
+		ss >> tmp;
+		if (tmp != key) 
+			continue;
+		if (tmp > key) 
+			return res;
+		getline(file, tmp);
+		ss.str(""); 
+		ss.clear(); 
+		//ss << tmp;
+		//ss >> tmp;
+		if (tmp != "SYN:") 
+			return res;
+		while (ss >> tmp) {
+			if (tmp[0] == '[' || tmp[0] == '{') continue;
+			res.push_back(tmp);
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 		}
+		file.close();
+		return res;
 	}
+<<<<<<< HEAD
 	else {
 		//vẽ trước 4 góc
 		//góc trên bên trái
@@ -734,9 +1098,24 @@ void VeKhungCH(int x, int y, int width, int height, bool draw) {
 			gotoXY(x + width, i);
 			cout << " ";
 		}
-
-	}
+=======
+	file.close();
+	return res;
 }
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
+
+bool Engine::searchSyno(Node* root, string key, vector<int>& res, vector<string>& syno) {
+	bool check = false;
+	for (int i = 0; i < syno.size(); ++i) {
+		Node* searchRes = searchWord(root, syno[i], false);
+		if (searchRes) {
+			check = true;
+			res = corporator(res, searchRes->order);
+		}
+	}
+	return check;
+}
+<<<<<<< HEAD
 void resizeConsole(int width, int height)
 {
 	HWND console = GetConsoleWindow();
@@ -744,3 +1123,22 @@ void resizeConsole(int width, int height)
 	GetWindowRect(console, &r);
 	MoveWindow(console, r.left, r.top, width, height, TRUE);
 }
+=======
+/*
+Node* Engine::searchWord(Node* root, string key, bool title) {
+	Node* p = root;
+	int index, length = key.length();
+	for (int i = 0; i < length; ++i) {
+		index = convert(key[i]);
+		if (index == -1) continue;//invalid
+		if (!p->children[index]) return NULL;
+		p = p->children[index];
+	}
+	if (p) {
+		if (title && !p->isTitle) return NULL;
+		if (p->isLeaf) return p;
+	}
+	return NULL;
+}
+*/
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db

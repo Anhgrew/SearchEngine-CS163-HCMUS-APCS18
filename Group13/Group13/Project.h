@@ -8,9 +8,15 @@
 #include<ctime>
 using namespace std;
 struct Node {
+<<<<<<< HEAD
 	Node* children[42];//0-9:number,10-35:words,36:maybe :,37:.(for so thap phan), 38:$, 39:%, 40:#, 41:-
 	bool isLeaf, isTitle;
 	vector<int> order;//place it appears
+=======
+	Node* children[42];	//0-9:number,10-35:words,36:maybe :,37:.(for so thap phan), 38:$, 39:%, 40:#, 41:-
+	bool isLeaf, isTitle;
+	vector<int> order;	//place it appears
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 	string name_file;
 };
 struct Store {
@@ -21,7 +27,6 @@ struct Store {
 class Engine {
 public:
 	Node* getNode();
-	void addfile(vector<Node*>& root, string namefile, Node *&p);
 	string NumberToString(int num);
 	void insertWord(Node* &root, string key, int place, bool isTitle);
 	void insertStopword(Node* &root, string key);
@@ -49,14 +54,24 @@ public:
 	void destructor(vector<Node*>&root, Node* &stopword);
 	vector<string> getSyno(string key);
 	bool searchSyno(Node* root, string key, vector<int>& res, vector<string>& syno);
+<<<<<<< HEAD
 	bool isstopword(Node *& root, string &stopword);
 	void removing_stopword(string &key, Node *& stopword);
+=======
+	void addfile(vector<Node*>& root, string namefile, Node*& p);
+	void removing_stopword(string& key, Node*& stopword);
+	bool isstopword(Node*& root, string& stopword);
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
 };
 bool CompareByScore(const Store&a, const Store&b);
 int WordinSen(string sen);
 void History(vector<string>& res, string query);
 void clearHistory();
+<<<<<<< HEAD
 void loading(int x, int y);
 void VeKhungCH(int x, int y, int width, int height, bool draw);
 void resizeConsole(int width, int height);
 
+=======
+//bool checkDocEnter(ifstream& file);
+>>>>>>> 73d8c48334d1bb5bce6fbab7e29428fe902ab0db
