@@ -16,6 +16,20 @@ Node* Engine::getNode() {  // Creat Node. Use for all situation. Kiem tra neu no
 	return pNode;
 }
 
+//Change number to string
+string Engine::NumberToString(int num) {
+	stringstream ss;
+	ss << num;
+	return ss.str();
+}
+
+// Change float number to string
+string FloatToString(float num) {
+	stringstream ss;
+	ss << num;
+	return ss.str();
+}
+
 void Engine::addfile(vector<Node*>& root, string namefile, Node*& p)
 {
 	bool check = true;
@@ -616,6 +630,11 @@ void History(vector<string>& res, string query) {
 	output.close();
 }
 
+void clearHistory() {
+	ifstream file; file.open("history.txt", ios::out | ios::trunc);
+	file.close();
+}
+
 vector<string> Engine::getSyno(string key) {
 	vector<string> res;
 	res.push_back(key);
@@ -667,20 +686,29 @@ bool Engine::searchSyno(Node* root, string key, vector<int>& res, vector<string>
 	}
 	return check;
 }
-/*
-Node* Engine::searchWord(Node* root, string key, bool title) {
-	Node* p = root;
-	int index, length = key.length();
-	for (int i = 0; i < length; ++i) {
-		index = convert(key[i]);
-		if (index == -1) continue;//invalid
-		if (!p->children[index]) return NULL;
-		p = p->children[index];
-	}
-	if (p) {
-		if (title && !p->isTitle) return NULL;
-		if (p->isLeaf) return p;
-	}
-	return NULL;
+
+int Engine::convert(char key) 
+{
+	if (key >= 48 && key <= 57) return (key - '0');
+	if (key >= 97 && key <= 122) return (int(key) - 87);
+	if (key >= 65 && key <= 90) return (int(key) - 55);
+	if (key == ' ') return 36;
+	if (key == '.') return 37;
+	if (key == '$') return 38;
+	if (key == '%') return 39;
+	if (key == '#') return 40;
+	if (key == '-') return 41;
+	return -1;
 }
-*/
+
+bool Engine::isNumber(char key) 
+{
+	if (key >= 48 && key <= 57) return true;
+	return false;
+}
+
+bool Engine::isWord(char key) 
+{
+	if ((key >= 65 && key <= 90) || (key >= 97 && key <= 122)) return true;
+	return false;
+}

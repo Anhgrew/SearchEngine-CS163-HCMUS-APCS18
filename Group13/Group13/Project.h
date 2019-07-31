@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<math.h>
 #include<sstream>
 #include<vector>
 #include<algorithm>
@@ -20,6 +21,7 @@ struct Store {
 class Engine {
 public:
 	Node* getNode();
+	void addfile(vector<Node*>& root, string namefile, Node *&p);
 	string NumberToString(int num);
 	void insertWord(Node* &root, string key, int place, bool isTitle);
 	void insertStopword(Node* &root, string key);
@@ -47,12 +49,10 @@ public:
 	void destructor(vector<Node*>&root, Node* &stopword);
 	vector<string> getSyno(string key);
 	bool searchSyno(Node* root, string key, vector<int>& res, vector<string>& syno);
-	void addfile(vector<Node*>& root, string namefile, Node*& p);
-	void removing_stopword(string& key, Node*& stopword);
-	bool isstopword(Node*& root, string& stopword);
+	bool isstopword(Node *& root, string &stopword);
+	void removing_stopword(string &key, Node *& stopword);
 };
 bool CompareByScore(const Store&a, const Store&b);
 int WordinSen(string sen);
 void History(vector<string>& res, string query);
 void clearHistory();
-//bool checkDocEnter(ifstream& file);
