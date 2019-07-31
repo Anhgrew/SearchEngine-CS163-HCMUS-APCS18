@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <conio.h>
 #include "console.h"
 using namespace std;
@@ -8,7 +8,7 @@ int inputKey()
 	{
 		int key = _getch();
 
-		if (key == 224)
+		if (key == 224)	// special key
 		{
 			key = _getch();
 			return key + 1000;
@@ -23,6 +23,9 @@ int inputKey()
 
 	return key_none;
 }
+
+
+//-------------------------Screen-------------------------
 void clrscr()
 {
 	CONSOLE_SCREEN_BUFFER_INFO	csbiInfo;
@@ -38,6 +41,9 @@ void clrscr()
 	csbiInfo.dwCursorPosition.Y = 0;
 	SetConsoleCursorPosition(hConsoleOut, csbiInfo.dwCursorPosition);
 }
+
+
+//screen: goto [x,y]
 void gotoXY(int column, int line)
 {
 	COORD coord;
@@ -45,6 +51,9 @@ void gotoXY(int column, int line)
 	coord.Y = line;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+
+
+//screen: get [x]
 int whereX()
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -53,6 +62,8 @@ int whereX()
 	return -1;
 }
 
+
+//screen: get [y]
 int whereY()
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
