@@ -1,0 +1,26 @@
+﻿  Project.cpp
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(27,34): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(103,34): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(115,34): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(130,27): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(224,32): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(247,26): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(264,32): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(269,33): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(280,37): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(288,36): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(322,39): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(333,36): warning C4267:  '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(430,39): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(430,60): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(447,28): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(458,37): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(458,56): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(481,34): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(516,27): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(647,11): warning C4309:  'initializing': truncation of constant value
+  Source.cpp
+  Generating Code...
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(647,20): warning C4309:  'initializing': truncation of constant value
+C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(647,20): warning C4309: C:\Users\THINH\DOWNLOAD\Superman\Superman\Project.cpp(537) : warning C4715: 'Engine::getRange': not all control paths return a value
+  Superman.vcxproj -> C:\Users\THINH\DOWNLOAD\Superman\x64\Debug\Superman.exe
